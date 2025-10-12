@@ -11,7 +11,7 @@ export const Navbar = () => {
                 <Link href="/">
                     <Image src="/logo.svg" alt="logo" width={36} height={36} />
                 </Link>
-                <h3 className="text-xl">Docs</h3>
+                <h3 className="text-xl font-medium">Synkris</h3>
             </div>
             <SearchInput />
             <UserButton />
