@@ -1,10 +1,11 @@
 import { format } from "date-fns";
+import { useRouter } from "next/navigation";
 import { SiGoogledocs } from "react-icons/si";
-import { Building2Icon, CircleUser, MoreVertical } from "lucide-react";
+import { Building2Icon, CircleUser } from "lucide-react";
 
 import { TableCell, TableRow } from "@/components/ui/table";
 
-import { Button } from "@/components/ui/button";
+import { DocumentMenu } from "./document-menu";
 import { Doc } from "../../../convex/_generated/dataModel";
 
 interface DocumentRowProps {
@@ -12,8 +13,11 @@ interface DocumentRowProps {
 };
 
 export const DocumentRow = ({ document }: DocumentRowProps) => {
+    const router = useRouter();
+
     return (
         <TableRow
+            onClick={() => router.push(`/documents/${document._id}`)}
             className="cursor-pointer"
         >
             <TableCell className="w-[50px]">
@@ -32,9 +36,11 @@ export const DocumentRow = ({ document }: DocumentRowProps) => {
                     {format(new Date(document._creationTime), "MMM dd, yyyy")}
             </TableCell>
             <TableCell className="flex justify-end">
-                <Button variant="ghost" size="icon" className="rounded-full">
-                    <MoreVertical className="size-4"/>
-                </Button>
+                <DocumentMenu 
+                    documentId={document._id}
+                    title={document.title}
+                    onNewTab={() => window.open(`/documents/${document._id}`, "_blank")}
+                />
             </TableCell>
 
         </TableRow>
