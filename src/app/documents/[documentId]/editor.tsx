@@ -27,7 +27,9 @@ import { Ruler } from './ruler'
 import { Threads } from './threads'
 
 export const Editor = () => {
-  const liveblocks = useLiveblocksExtension();
+  const liveblocks = useLiveblocksExtension({
+    mentions: true,
+  });
   const { setEditor } = useEditorStore();
 
     const editor = useEditor({
