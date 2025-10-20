@@ -1,5 +1,16 @@
 "use server"
+
+import { ConvexHttpClient } from "convex/browser";
 import { auth, clerkClient } from "@clerk/nextjs/server";
+
+import { api } from "../../../../convex/_generated/api";
+import { Id } from "../../../../convex/_generated/dataModel";
+
+const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+
+export async function getDocuments(ids: Id<"documents">[]) {
+    return await convex.query(api.documents.getByIds, { ids })
+};
 
 export async function getUsers() {
     const { sessionClaims } = await auth();
@@ -11,8 +22,6 @@ export async function getUsers() {
         (sessionClaims as { organization_id?: string; org_id?: string; orgId?: string })?.organization_id ||
         (sessionClaims as { organization_id?: string; org_id?: string; orgId?: string })?.org_id ||
         (sessionClaims as { organization_id?: string; org_id?: string; orgId?: string })?.orgId;
-
-    console.log('Fetched orgId in getUsers:', orgId);  // Debug log: Terminal mein check karo
 
     if (!orgId) {
         console.warn('No orgId found – returning empty users');
@@ -28,7 +37,6 @@ export async function getUsers() {
             name: user.fullName ?? user.primaryEmailAddress?.emailAddress ?? "Anonymous",
             avatar: user.imageUrl,
         }));
-        console.log('Fetched users from Clerk:', users);  // Debug log: Kitne users mile
         return users;
     } catch (error) {
         console.error('Error fetching users:', error);  // Error log for troubleshooting
