@@ -1,4 +1,4 @@
-import { preloadQuery, usePreloadedQuery } from "convex/nextjs";
+import { preloadQuery } from "convex/nextjs";
 import { auth } from "@clerk/nextjs/server";
 
 import { Document } from "./document";

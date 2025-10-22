@@ -15,7 +15,7 @@ import { LEFT_MARGIN_DEFAULT, RIGHT_MARGIN_DEFAULT } from "@/constants/margins";
 import { getUsers, getDocuments } from "./actions";
 import { Id } from "../../../../convex/_generated/dataModel";
 
-type User = { id: string; name: string; avatar: string };
+type User = { id: string; name: string; avatar: string, color: string };
 
 export function Room({ children }: { children: ReactNode }) {
     const params = useParams();
@@ -28,7 +28,7 @@ export function Room({ children }: { children: ReactNode }) {
           const list = await getUsers();
           setUsers(list || []);
         } catch (error) {
-          toast.error("Failed to fetch users");
+          toast.error(`Failed to fetch users ${error}`);
         }
       },
       [],
@@ -55,17 +55,31 @@ export function Room({ children }: { children: ReactNode }) {
       resolveUsers={({ userIds }) => {
         const resolved = userIds.map((userId) => {
           const user = users.find((u) => u.id === userId);
+
+          // ✅ generate consistent color (same logic as server)
+          const name = user?.name ?? "Anonymous";
+          const nameToNumber = name.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
+          const hue = Math.abs(nameToNumber) % 360;
+          const color = `hsl(${hue}, 80%, 60%)`;
+
           if (!user) {
-            return { name: "Anonymous", avatar: "" };
+            return {
+              name: "Anonymous",
+              avatar: "",
+              color, // ✅ added color here
+            };
           }
+
           return {
             name: user.name,
             avatar: user.avatar,
+            color, // ✅ added color here
           };
         });
 
         return resolved;
       }}
+
       resolveMentionSuggestions={({ text }) => {
         let filteredUsers = users;
 
