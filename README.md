@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FYP-Synkris — Collaborative Document Editor
 
-## Getting Started
+## 🧭 How to Run the Project (Simple Steps)
 
-First, run the development server:
+### 1️⃣ Clone the Repository
+
+Open **CMD** or **Git Bash**, then run:
+
+```bash
+git clone https://github.com/ammarzahid-pk/FYP-Synkris.git
+cd FYP-Synkris
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Create `.env.local`
+
+After creating this file, **contact Ammar** for the correct values — this file contains secret keys and should not be shared publicly.
+
+```env
+NEXT_PUBLIC_CONVEX_URL=https://your-convex-url.convex.cloud
+NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY=pk_live_yourpublickey
+```
+
+### 4️⃣ Run the App
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Now open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+✅ The app will connect automatically to the shared Convex database and Liveblocks workspace.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ⚙️ Commands You May Need
 
-To learn more about Next.js, take a look at the following resources:
+| Action                 | Command                                |
+| ---------------------- | -------------------------------------- |
+| Pull latest updates    | `git pull origin main`                 |
+| Create a new branch    | `git checkout -b feature/branch-name`  |
+| Switch branch          | `git checkout branch-name`             |
+| Add and commit changes | `git add . && git commit -m "message"` |
+| Push your branch       | `git push origin feature/branch-name`  |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ❌ Common Issues
 
-## Deploy on Vercel
+| Problem               | Fix                                                 |
+| --------------------- | --------------------------------------------------- |
+| App not starting      | Run `npm install` again                             |
+| Env error             | Check `.env.local` values                           |
+| Real-time not working | Make sure Convex URL and Liveblocks key are correct |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ✅ Summary
+
+1. Open CMD or Git Bash
+2. Clone the repo
+3. Run `npm install`
+4. Create `.env.local` (get keys from Ammar)
+5. Run `npm run dev`
+
+That’s it! The project will run locally and connect to the same backend as everyone else.
